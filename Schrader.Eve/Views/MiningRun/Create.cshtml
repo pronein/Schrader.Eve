@@ -1,0 +1,127 @@
+﻿@model Schrader.Eve.Models.MiningRun
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>EveItem</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date)
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Site, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Site)
+                @Html.ValidationMessageFor(model => model.Site)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.System, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.System)
+                @Html.ValidationMessageFor(model => model.System)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <table class="table">
+                <tr>
+                    <th colspan="2">Item</th>
+                    <th>Qty</th>
+                    <th>Estimated ISK Per</th>
+                    <th>Volume (m^3)</th>
+                    <th>Actual ISK Per</th>
+                    <th>
+                        <a id="bt-add-ore">Add Ore</a>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.OreResults)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImageId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EstimatedIskPer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VolumePer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ActualIskPer)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<div id="dlg-mrli-ore" style="display: none;">
+    @Html.Partial("EditorTemplates/MiningRunLineItemEditor", new Schrader.Eve.Models.MiningRunLineItem());
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Styles.Render("~/Content/dot-luv")
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dlg-mrli-ore').dialog({
+            autoOpen: false,
+            //height: 300,
+            //width: 350,
+            modal: true
+        });
+
+        $('#bt-add-ore')
+        .button()
+        .click(function () {
+            $('#dlg-mrli-ore').dialog('open');
+        });
+    });
+</script>

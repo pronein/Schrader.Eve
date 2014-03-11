@@ -1,0 +1,39 @@
+﻿@model Schrader.Eve.Models.MiningRun
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Scripts.Render("~/bundles/jcarousellite")
+
+<h2>Mining Run</h2>
+
+<div style="float: right;">
+    Status: @Model.Status
+</div>
+
+<table>
+    <tr>
+        <td>Date:</td>
+        <td>@Model.Date.ToString("MM/dd/yy")</td>
+    </tr>
+    <tr>
+        <td>System:</td>
+        <td>@Model.System</td>
+    </tr>
+    <tr>
+        <td>Site:</td>
+        <td>@Model.Site</td>
+    </tr>
+</table>
+
+@Html.Partial("CapsuleerPartial", Model.Capsuleers)
+
+<h3>Ore Results</h3>
+@Html.Partial("MiningRunLineItemPartial", Model.OreResults)
+
+<h3>Minerals Refined</h3>
+@Html.Partial("MiningRunLineItemPartial", Model.MineralResults)
+
+<h3>Losses</h3>
+@Html.Partial("MiningRunLineItemPartial", Model.Losses)

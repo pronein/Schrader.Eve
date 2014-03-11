@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schrader.Eve", "Schrader.Eve\Schrader.Eve.csproj", "{DFA24B7E-85F0-4E1A-A31A-C7FE120EBCA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schrader.Eve.Tests", "Schrader.Eve.Tests\Schrader.Eve.Tests.csproj", "{11FF46FC-1829-4D70-AAC3-C2121A0FB364}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFA24B7E-85F0-4E1A-A31A-C7FE120EBCA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA24B7E-85F0-4E1A-A31A-C7FE120EBCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA24B7E-85F0-4E1A-A31A-C7FE120EBCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA24B7E-85F0-4E1A-A31A-C7FE120EBCA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11FF46FC-1829-4D70-AAC3-C2121A0FB364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11FF46FC-1829-4D70-AAC3-C2121A0FB364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11FF46FC-1829-4D70-AAC3-C2121A0FB364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11FF46FC-1829-4D70-AAC3-C2121A0FB364}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
