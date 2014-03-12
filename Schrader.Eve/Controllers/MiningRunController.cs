@@ -13,18 +13,18 @@ namespace Schrader.Eve.Controllers
 {
     public class MiningRunController : Controller
     {
-        private MiningRunDbContext db = new MiningRunDbContext();
+        private MissionDbContext db = new MissionDbContext();
 
         // GET: /MiningRun/
-        public ActionResult Index(long? id)
+        public ActionResult Index()
         {
-            if (id.HasValue)
-                return View(db.MiningRuns
-                    .Include(mr => mr.LineItems)
-                    .Include(mr => mr.Capsuleers.Select(p=>p.Pilot))
-                    .First(mr => mr.Id == id));
+            // this is going to be a problem for when missions are still
+            // in pending state and don't have a start time yet...
+            IEnumerable<Mission> missions = db.Missions
+                .Where(x => x.Type == MissionType.MiningRun)
+                .ToList();
 
-            return View(new MiningRun());
+            return View(missions);
         }
 
         // GET: /MiningRun/Details/5
@@ -34,18 +34,21 @@ namespace Schrader.Eve.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MiningRun miningRun = db.MiningRuns.Find(id);
+
+            Mission miningRun = db.Missions.Find(id);
+
             if (miningRun == null)
             {
                 return HttpNotFound();
             }
+
             return View(miningRun);
         }
 
         // GET: /MiningRun/Create
         public ActionResult Create()
         {
-            return View(new MiningRun());
+            return View(new Mission());
         }
 
         // POST: /MiningRun/Create
@@ -53,11 +56,11 @@ namespace Schrader.Eve.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,System,Site,Status")] MiningRun miningRun)
+        public ActionResult Create([Bind(Include = "Id,Date,System,Site,Status")] Mission miningRun)
         {
             if (ModelState.IsValid)
             {
-                db.MiningRuns.Add(miningRun);
+                db.Missions.Add(miningRun);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -72,7 +75,7 @@ namespace Schrader.Eve.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MiningRun miningRun = db.MiningRuns.Find(id);
+            Mission miningRun = db.Missions.Find(id);
             if (miningRun == null)
             {
                 return HttpNotFound();
@@ -85,7 +88,7 @@ namespace Schrader.Eve.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date,System,Site,Status")] MiningRun miningRun)
+        public ActionResult Edit([Bind(Include = "Id,Date,System,Site,Status")] Mission miningRun)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +106,7 @@ namespace Schrader.Eve.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MiningRun miningRun = db.MiningRuns.Find(id);
+            Mission miningRun = db.Missions.Find(id);
             if (miningRun == null)
             {
                 return HttpNotFound();
@@ -116,16 +119,17 @@ namespace Schrader.Eve.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            MiningRun miningRun = db.MiningRuns.Find(id);
-            db.MiningRuns.Remove(miningRun);
+            Mission miningRun = db.Missions.Find(id);
+            db.Missions.Remove(miningRun);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public PartialViewResult ShowCapsuleerDetailPartial(string characterId)
+        public PartialViewResult ShowCapsuleerDetailPartial(long pilotId)
         {
-            var capsuleer = db.Capsuleers.Include(x => x.Pilot).Where(x => x.Pilot.CharacterId == characterId).FirstOrDefault();
+            var capsuleer = db.MissionPilots.Find(pilotId);
+
             return PartialView("CapsuleerDetailPartial", capsuleer);
         }
 

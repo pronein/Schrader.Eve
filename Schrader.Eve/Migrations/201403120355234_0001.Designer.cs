@@ -13,7 +13,7 @@ namespace Schrader.Eve.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201403082252570_0001"; }
+            get { return "201403120355234_0001"; }
         }
         
         string IMigrationMetadata.Source

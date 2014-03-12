@@ -1,4 +1,4 @@
-﻿@model Schrader.Eve.Models.MiningRunCapsuleer
+﻿@model Schrader.Eve.Models.MissionPilot
 
 <div style="position: relative; display:block; height: 200px;">
     <img src="@string.Format("http://image.eveonline.com/Character/{0}_200.jpg", Model.Pilot.CharacterId)" 
@@ -7,11 +7,13 @@
         <h4 style="color: black;">@Model.Pilot.Name - @Model.Role</h4>
         <span>Participation Time: 37.5 hrs</span>
         <div style="position: absolute; left: 220px; bottom: 10px;">
-            <img style="float:left;" src="http://image.eveonline.com/Type/17765_64.png" />
+            <img style="float:left;" src="@string.Format("http://image.eveonline.com/Type/{0}_64.png", Model.Ship.Item.TypeId)" />
             <div style="float:left">
-                Ship Name<br />
-                Ship Type<br />
-                Ship Class
+                @Model.Ship.Name
+                <br />
+                @Model.Ship.Item.Name
+                <br />
+                @Model.Ship.Class
             </div>
         </div>
     </div>

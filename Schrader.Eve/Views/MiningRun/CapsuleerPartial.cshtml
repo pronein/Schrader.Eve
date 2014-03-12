@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Schrader.Eve.Models.MiningRunCapsuleer>
+﻿@model IEnumerable<Schrader.Eve.Models.MissionPilot>
 
 <div style="width: 700px;">
     <div id="capsuleer_detail">
@@ -7,11 +7,11 @@
     <div style="display: block; position: relative; margin-left: 44px;">
         <div class="capsuleer-carousel">
             <ul>
-                @foreach (var capsuleer in Model)
+                @foreach (var pilot in Model)
                 {
                     <li>
-                        <img data-cid="@capsuleer.Pilot.CharacterId"
-                             src="@string.Format("http://image.eveonline.com/Character/{0}_128.jpg", capsuleer.Pilot.CharacterId)"
+                        <img data-pid="@pilot.Id"
+                             src="@string.Format("http://image.eveonline.com/Character/{0}_128.jpg", pilot.Pilot.CharacterId)"
                              width="128" height="128" />
                     </li>
                 }
@@ -36,11 +36,11 @@
 
         function afterEndCallback(items) {
             var $currentItem = $(items[0]).children(0);
-            var cid = $currentItem.data('cid');
+            var pid = $currentItem.data('pid');
 
             $.ajax({
                 url: '@Url.Action("ShowCapsuleerDetailPartial", "MiningRun")',
-                data: { characterId: cid },
+                data: { pilotId: pid },
                 cache: false,
                 type: "POST",
                 dataType: "html",

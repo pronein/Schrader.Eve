@@ -11,7 +11,7 @@ namespace Schrader.Eve
     {
         private void ConfigureDatabase()
         {
-            Database.SetInitializer<MiningRunDbContext>(null);
+            Database.SetInitializer<MissionDbContext>(null);
         }
     }
 }

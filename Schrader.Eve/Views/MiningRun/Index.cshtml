@@ -1,39 +1,33 @@
-﻿@model Schrader.Eve.Models.MiningRun
+﻿@model IEnumerable<Schrader.Eve.Models.Mission>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Mining Runs";
 }
 
-@Scripts.Render("~/bundles/jcarousellite")
+<h2>Mining Runs - @Html.ActionLink("New Mining Run", "Create")</h2>
 
-<h2>Mining Run</h2>
-
-<div style="float: right;">
-    Status: @Model.Status
-</div>
-
-<table>
+<table class="table">
     <tr>
-        <td>Date:</td>
-        <td>@Model.Date.ToString("MM/dd/yy")</td>
+        <th>@Html.DisplayNameFor(x => x.Designation)</th>
+        <th>@Html.DisplayNameFor(x => x.Site)</th>
+        <th>@Html.DisplayNameFor(x => x.System)</th>
+        <th>Start Time</th>
+        <th>Pilot Count</th>
+        <th>@*Manage Button*@</th>
+        <th>@*Delete/Cancel/Start/Finish Button*@</th>
+        <th>@*View Button*@</th>
     </tr>
-    <tr>
-        <td>System:</td>
-        <td>@Model.System</td>
-    </tr>
-    <tr>
-        <td>Site:</td>
-        <td>@Model.Site</td>
-    </tr>
+    @foreach (var mission in Model)
+    {
+        <tr>
+            <td>@mission.Designation</td>
+            <td>@mission.Site</td>
+            <td>@mission.System</td>
+            <td>@mission.StartTime</td>
+            <td>@mission.PilotCount</td>
+            <td>@Html.ActionLink("Manage", "Manage", new { id = @mission.Id })</td>
+            <td>n/a</td>
+            <td>@Html.ActionLink("View", "Details", new { id = @mission.Id })</td>
+        </tr>
+    }
 </table>
-
-@Html.Partial("CapsuleerPartial", Model.Capsuleers)
-
-<h3>Ore Results</h3>
-@Html.Partial("MiningRunLineItemPartial", Model.OreResults)
-
-<h3>Minerals Refined</h3>
-@Html.Partial("MiningRunLineItemPartial", Model.MineralResults)
-
-<h3>Losses</h3>
-@Html.Partial("MiningRunLineItemPartial", Model.Losses)

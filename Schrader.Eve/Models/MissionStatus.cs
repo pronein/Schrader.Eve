@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Schrader.Eve.Models
 {
-    public enum MiningRunItemType
+    public enum MissionStatus
     {
-        Ore,
-        Mineral,
-        Salvage,
-        Loss
+        Unknown,
+        InProgress,
+        Complete,
+        PaidOut
     }
 }

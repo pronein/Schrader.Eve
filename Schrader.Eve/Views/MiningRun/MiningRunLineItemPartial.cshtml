@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Schrader.Eve.Models.MiningRunLineItem>
+﻿@model IEnumerable<Schrader.Eve.Models.MissionItem>
 
 <table class="table">
     <tr>
         <th colspan="2">
-            @Html.DisplayNameFor(m => m.Name)
+            @Html.DisplayNameFor(m => m.Item.Name)
         </th>
         <th class="align-center">
             @Html.DisplayNameFor(m => m.Quantity)
@@ -22,10 +22,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            <img src="@string.Format("http://image.eveonline.com/Type/{0}_32.png", item.ImageId)" />
+            <img src="@string.Format("http://image.eveonline.com/Type/{0}_32.png", item.Item.TypeId)" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Item.Name)
         </td>
         <td class="align-center">
             @Html.DisplayFor(modelItem => item.Quantity)

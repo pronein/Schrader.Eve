@@ -1,66 +1,39 @@
-﻿@model Schrader.Eve.Models.MiningRun
+﻿@model Schrader.Eve.Models.Mission
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Index";
 }
 
-<h2>Details</h2>
+@Scripts.Render("~/bundles/jcarousellite")
 
-<div>
-    <h4>EveItem</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<h2>Mining Run Detail</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatedIskPer)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EstimatedIskPer)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VolumePer)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VolumePer)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActualIskPer)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActualIskPer)
-        </dd>
-
-    </dl>
+<div style="float: right;">
+    Status: @Model.Status
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<table>
+    <tr>
+        <td>Date:</td>
+        <td>@Model.StartTime.ToString("MM/dd/yy")</td>
+    </tr>
+    <tr>
+        <td>System:</td>
+        <td>@Model.System</td>
+    </tr>
+    <tr>
+        <td>Site:</td>
+        <td>@Model.Site</td>
+    </tr>
+</table>
+
+@Html.Partial("CapsuleerPartial", Model.Pilots)
+
+<h3>Ore Results</h3>
+@Html.Partial("MiningRunLineItemPartial", Model.OreResults)
+
+<h3>Minerals Refined</h3>
+@Html.Partial("MiningRunLineItemPartial", Model.MineralResults)
+
+<h3>Losses</h3>
+@Html.Partial("MiningRunLineItemPartial", Model.Losses)

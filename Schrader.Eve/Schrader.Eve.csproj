@@ -165,30 +165,36 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403082201384_InitialCreate.cs" />
-    <Compile Include="Migrations\201403082201384_InitialCreate.Designer.cs">
-      <DependentUpon>201403082201384_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201403120355234_0001.cs" />
+    <Compile Include="Migrations\201403120355234_0001.Designer.cs">
+      <DependentUpon>201403120355234_0001.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403082252570_0001.cs" />
-    <Compile Include="Migrations\201403082252570_0001.Designer.cs">
-      <DependentUpon>201403082252570_0001.cs</DependentUpon>
+    <Compile Include="Migrations\201403120408571_0002.cs" />
+    <Compile Include="Migrations\201403120408571_0002.Designer.cs">
+      <DependentUpon>201403120408571_0002.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403082355473_0002.cs" />
-    <Compile Include="Migrations\201403082355473_0002.Designer.cs">
-      <DependentUpon>201403082355473_0002.cs</DependentUpon>
+    <Compile Include="Migrations\201403120532314_0003.cs" />
+    <Compile Include="Migrations\201403120532314_0003.Designer.cs">
+      <DependentUpon>201403120532314_0003.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\DbContexts\CapsuleerDbContext.cs" />
-    <Compile Include="Models\DbContexts\MiningRunDbContext.cs" />
-    <Compile Include="Models\MiningRunLineItem.cs" />
+    <Compile Include="Models\DbContexts\MissionDbContext.cs" />
+    <Compile Include="Models\IskValue.cs" />
+    <Compile Include="Models\EveItem.cs" />
     <Compile Include="Models\Capsuleer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\MiningRun.cs" />
-    <Compile Include="Models\MiningRunItemType.cs" />
-    <Compile Include="Models\MiningRunCapsuleer.cs" />
-    <Compile Include="Models\MiningRunStatus.cs" />
+    <Compile Include="Models\Mission.cs" />
+    <Compile Include="Models\MissionItemType.cs" />
+    <Compile Include="Models\MissionActivityAudit.cs" />
+    <Compile Include="Models\MissionItem.cs" />
+    <Compile Include="Models\MissionKill.cs" />
+    <Compile Include="Models\MissionPilot.cs" />
+    <Compile Include="Models\MissionPilotActivityAudit.cs" />
+    <Compile Include="Models\MissionStatus.cs" />
     <Compile Include="Models\CapsuleerRole.cs" />
+    <Compile Include="Models\MissionType.cs" />
+    <Compile Include="Models\MissionShip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -196,6 +202,10 @@
     <Content Include="App_Data\aspnet-Schrader.Eve-20140308025854.mdf" />
     <Content Include="App_Data\aspnet-Schrader.Eve-20140308025854_log.ldf">
       <DependentUpon>aspnet-Schrader.Eve-20140308025854.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\Eve.mdf" />
+    <Content Include="App_Data\Eve_log.ldf">
+      <DependentUpon>Eve.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -262,7 +272,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\MiningRun\Create.cshtml" />
     <Content Include="Views\MiningRun\Delete.cshtml" />
-    <Content Include="Views\MiningRun\Details.cshtml" />
     <Content Include="Views\MiningRun\Edit.cshtml" />
     <Content Include="Views\MiningRun\Index.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
@@ -270,6 +279,7 @@
     <Content Include="Views\MiningRun\CapsuleerPartial.cshtml" />
     <Content Include="Views\MiningRun\CapsuleerDetailPartial.cshtml" />
     <Content Include="Views\MiningRun\EditorTemplates\MiningRunLineItemEditor.cshtml" />
+    <Content Include="Views\MiningRun\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -279,17 +289,16 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201403082201384_InitialCreate.resx">
-      <DependentUpon>201403082201384_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201403120355234_0001.resx">
+      <DependentUpon>201403120355234_0001.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201403082252570_0001.resx">
-      <DependentUpon>201403082252570_0001.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201403120408571_0002.resx">
+      <DependentUpon>201403120408571_0002.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201403082355473_0002.resx">
-      <DependentUpon>201403082355473_0002.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201403120532314_0003.resx">
+      <DependentUpon>201403120532314_0003.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

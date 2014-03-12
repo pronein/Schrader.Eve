@@ -7,13 +7,13 @@ namespace Schrader.Eve.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-20911")]
-    public sealed partial class _0002 : IMigrationMetadata
+    public sealed partial class _0003 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_0002));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_0003));
         
         string IMigrationMetadata.Id
         {
-            get { return "201403082355473_0002"; }
+            get { return "201403120532314_0003"; }
         }
         
         string IMigrationMetadata.Source
