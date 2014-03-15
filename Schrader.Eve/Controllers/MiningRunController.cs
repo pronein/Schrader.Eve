@@ -8,21 +8,37 @@ using System.Web;
 using System.Web.Mvc;
 using Schrader.Eve.Models;
 using Schrader.Eve.Models.DbContexts;
+using Schrader.Eve.Models.Repositories.Interfaces;
+using Schrader.Eve.Services.Interfaces;
+using Schrader.Eve.Services;
 
 namespace Schrader.Eve.Controllers
 {
+    // Every navigation or refresh (F5 or CTRL+F5) builds a brand new
+    // controller (ei. _missionService is always null at action method entry)
     public class MiningRunController : Controller
     {
-        private MissionDbContext db = new MissionDbContext();
+        private IMissionService _missionService;
+
+        public MiningRunController()
+        {
+            _missionService = new MissionService();
+        }
+
+        public MiningRunController(IMissionService missionService)
+        {
+            _missionService = missionService;
+        }
 
         // GET: /MiningRun/
         public ActionResult Index()
         {
             // this is going to be a problem for when missions are still
             // in pending state and don't have a start time yet...
-            IEnumerable<Mission> missions = db.Missions
-                .Where(x => x.Type == MissionType.MiningRun)
-                .ToList();
+            //IEnumerable<Mission> missions = db.Missions
+            //    .Where(x => x.Type == MissionType.MiningRun)
+            //    .ToList();
+            var missions = _missionService.GetMissions(x => x.Type == MissionType.MiningRun);
 
             return View(missions);
         }
@@ -35,7 +51,7 @@ namespace Schrader.Eve.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Mission miningRun = db.Missions.Find(id);
+            Mission miningRun = _missionService.GetMission(id.Value);
 
             if (miningRun == null)
             {
@@ -60,8 +76,8 @@ namespace Schrader.Eve.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Missions.Add(miningRun);
-                db.SaveChanges();
+                //db.Missions.Add(miningRun);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -75,7 +91,7 @@ namespace Schrader.Eve.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Mission miningRun = db.Missions.Find(id);
+            Mission miningRun = null;// db.Missions.Find(id);
             if (miningRun == null)
             {
                 return HttpNotFound();
@@ -92,8 +108,8 @@ namespace Schrader.Eve.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(miningRun).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(miningRun).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(miningRun);
@@ -106,7 +122,7 @@ namespace Schrader.Eve.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Mission miningRun = db.Missions.Find(id);
+            Mission miningRun = null;// db.Missions.Find(id);
             if (miningRun == null)
             {
                 return HttpNotFound();
@@ -119,25 +135,25 @@ namespace Schrader.Eve.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Mission miningRun = db.Missions.Find(id);
-            db.Missions.Remove(miningRun);
-            db.SaveChanges();
+            //Mission miningRun = db.Missions.Find(id);
+            //db.Missions.Remove(miningRun);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public PartialViewResult ShowCapsuleerDetailPartial(long pilotId)
+        public PartialViewResult LoadMissionPilotDetailPartial(long pilotId)
         {
-            var capsuleer = db.MissionPilots.Find(pilotId);
+            var capsuleer = _missionService.GetPilot(pilotId);
 
-            return PartialView("CapsuleerDetailPartial", capsuleer);
+            return PartialView("MissionPilotDetailPartial", capsuleer);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                if (_missionService != null) _missionService.Dispose();
             }
             base.Dispose(disposing);
         }

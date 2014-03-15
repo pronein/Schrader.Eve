@@ -17,6 +17,21 @@ namespace Schrader.Eve.Models
 
         public virtual ICollection<MissionPilotActivityAudit> TimeAudits { get; set; }
 
+        public double TotalHoursInMision
+        {
+            get
+            {
+                double totalHours = 0f;
+                foreach(MissionPilotActivityAudit audit in TimeAudits)
+                {
+                    DateTime endTime = audit.EndTime == DateTime.MinValue ? DateTime.Now : audit.EndTime;
+                    totalHours += (endTime - audit.StartTime).TotalHours;
+                }
+
+                return totalHours;
+            }
+        }
+
         public MissionPilot()
         {
             TimeAudits = new List<MissionPilotActivityAudit>();

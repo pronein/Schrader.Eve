@@ -195,7 +195,13 @@
     <Compile Include="Models\CapsuleerRole.cs" />
     <Compile Include="Models\MissionType.cs" />
     <Compile Include="Models\MissionShip.cs" />
+    <Compile Include="Models\Repositories\Interfaces\IRepository.cs" />
+    <Compile Include="Models\Repositories\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Models\Repositories\Repository.cs" />
+    <Compile Include="Models\Repositories\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\IMissionService.cs" />
+    <Compile Include="Services\MissionService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +250,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Views\MissionPilotPartial.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -276,8 +283,8 @@
     <Content Include="Views\MiningRun\Index.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\MiningRun\MiningRunLineItemPartial.cshtml" />
-    <Content Include="Views\MiningRun\CapsuleerPartial.cshtml" />
-    <Content Include="Views\MiningRun\CapsuleerDetailPartial.cshtml" />
+    <Content Include="Views\MiningRun\MissionPilotPartial.cshtml" />
+    <Content Include="Views\MiningRun\MissionPilotDetailPartial.cshtml" />
     <Content Include="Views\MiningRun\EditorTemplates\MiningRunLineItemEditor.cshtml" />
     <Content Include="Views\MiningRun\Details.cshtml" />
   </ItemGroup>
@@ -299,6 +306,7 @@
       <DependentUpon>201403120532314_0003.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

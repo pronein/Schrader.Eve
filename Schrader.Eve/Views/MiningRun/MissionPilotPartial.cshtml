@@ -2,7 +2,7 @@
 
 <div style="width: 700px;">
     <div id="capsuleer_detail">
-        @Html.Partial("CapsuleerDetailPartial", Model.First())
+        @Html.Partial("MissionPilotDetailPartial", Model.First())
     </div>
     <div style="display: block; position: relative; margin-left: 44px;">
         <div class="capsuleer-carousel">
@@ -39,7 +39,7 @@
             var pid = $currentItem.data('pid');
 
             $.ajax({
-                url: '@Url.Action("ShowCapsuleerDetailPartial", "MiningRun")',
+                url: '@Url.Action("LoadMissionPilotDetailPartial", "MiningRun")',
                 data: { pilotId: pid },
                 cache: false,
                 type: "POST",
